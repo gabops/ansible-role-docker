@@ -1,0 +1,14 @@
+---
+docker_repository: https://download.docker.com/linux/fedora/docker-ce.repo
+docker_repository_key: https://download.docker.com/linux/fedora/gpg
+docker_deprecated_packages:
+  - docker
+  - docker-client
+  - docker-client-latest
+  - docker-common
+  - docker-latest
+  - docker-latest-logrotate
+  - docker-logrotate
+  - docker-selinux
+  - docker-engine-selinux
+  - docker-engine

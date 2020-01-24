@@ -1,0 +1,43 @@
+---
+- block:
+    - name: Uninstall deprecated Docker packages (RedHat)
+      yum:
+        name: "{{ docker_deprecated_packages }}"
+        state: absent
+
+    - name: Install Docker repository key (RedHat)
+      rpm_key:
+        key: "{{ docker_repository_key }}"
+
+    - name: Install Docker repository (RedHat)
+      get_url:
+        url: "{{ docker_repository }}"
+        dest: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker (RedHat)
+      yum:
+        name: "{{ docker_packages }}"
+        state: present
+        enablerepo: "docker-ce-{{ docker_release_channel }}"
+  when: ansible_os_family == "RedHat"
+
+- block:
+    - name: Uninstall deprecated Docker packages (Debian)
+      apt:
+        name: "{{ docker_deprecated_packages }}"
+        state: absent
+
+    - name: Configure Docker repository key (Debian)
+      apt_key:
+        url: "{{ docker_repository_key | default(omit) }}"
+
+    - name: Configure Docker repository (Debian)
+      apt_repository:
+        repo: "{{ docker_repository }}"
+        filename: docker-ce
+
+    - name: Install Docker (Debian)
+      apt:
+        name: "{{ docker_packages }}"
+        update_cache: true
+  when: ansible_os_family == "Debian"

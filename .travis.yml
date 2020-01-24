@@ -1,0 +1,22 @@
+---
+language: python
+services: docker
+
+env:
+  matrix:
+    - TEST_DISTRO: centos:7
+    - TEST_DISTRO: debian:9
+    - TEST_DISTRO: debian:10
+    - TEST_DISTRO: fedora:31
+    - TEST_DISTRO: ubuntu:16.04
+    - TEST_DISTRO: ubuntu:18.04
+    - TEST_DISTRO: ubuntu:19.04
+
+install:
+  - pip install -r molecule/requirements.txt
+
+script:
+  - molecule test --all
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

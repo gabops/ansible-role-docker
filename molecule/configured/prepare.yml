@@ -1,0 +1,19 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install requirements
+      import_role:
+        name: gabops.packages_os
+      vars:
+        packages_os:
+          fedora_31:
+            python3-libselinux: present
+
+    - name: Create groups
+      group:
+        name: devops
+
+    - name: Create users
+      user:
+        name: john.doe

@@ -1,0 +1,14 @@
+---
+docker_engine_version: latest
+
+docker_cli_version: latest
+
+docker_service_enabled: true
+
+docker_service_state: started
+
+docker_release_channel: stable
+
+docker_daemon_config: {}
+
+docker_group_members: []

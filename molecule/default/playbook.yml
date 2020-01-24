@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    docker_daemon_config:
+      storage-driver: "vfs"
+  roles:
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

@@ -1,0 +1,24 @@
+---
+- name: Include distro variables
+  include_vars: "{{ ansible_distribution }}.yml"
+
+- name: Set architecture format for "x86_64"
+  set_fact:
+    docker_system_arch: amd64
+  when: ansible_architecture == "x86_64"
+
+- name: Set Docker package versions (RedHat)
+  set_fact:
+    docker_packages:
+      - "{{ 'docker-ce' if docker_engine_version == 'latest' else 'docker-ce-%s*' | format(docker_engine_version) }}"
+      - "{{ 'docker-ce-cli' if docker_cli_version == 'latest' else 'docker-ce-cli-%s*' | format(docker_cli_version) }}"
+      - containerd.io
+  when: ansible_os_family == "RedHat"
+
+- name: Set Docker package versions (Debian)
+  set_fact:
+    docker_packages:
+      - "{{ 'docker-ce' if docker_engine_version == 'latest' else 'docker-ce=%s*' | format(docker_engine_version) }}"
+      - "{{ 'docker-ce-cli' if docker_cli_version == 'latest' else 'docker-ce-cli=%s*' | format(docker_cli_version) }}"
+      - containerd.io
+  when: ansible_os_family == "Debian"

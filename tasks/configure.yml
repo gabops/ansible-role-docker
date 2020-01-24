@@ -1,0 +1,25 @@
+---
+- block:
+    - name: Create Docker daemon configuration directory
+      file:
+        name: /etc/docker
+        state: directory
+
+    - name: Configure Docker daemon
+      template:
+        src: daemon.json.j2
+        dest: /etc/docker/daemon.json
+  when: docker_daemon_config | length
+
+- name: Configure Docker group members
+  user:
+    user: "{{ item }}"
+    groups: docker
+    append: true
+  loop: "{{ docker_group_members }}"
+
+- name: Configure Docker service
+  service:
+    name: "{{ docker_service_name }}"
+    enabled: "{{ docker_service_enabled }}"
+    state: "{{ docker_service_state }}"
