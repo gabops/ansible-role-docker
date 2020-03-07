@@ -34,7 +34,7 @@
     - name: Configure Docker repository (Debian)
       apt_repository:
         repo: "{{ docker_repository }}"
-        filename: docker-ce
+        filename: docker-ce.list
 
     - name: Install Docker (Debian)
       apt:
