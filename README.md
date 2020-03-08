@@ -41,8 +41,8 @@ Example Playbook
 ```yaml
 - hosts: docker
   vars:
-    docker_engine_version: 18.09
-    docker_cli_version: 19.03.2
+    docker_engine_version: "18.09"
+    docker_cli_version: "19.03.2"
     docker_daemon_config:
       data-root: "/mnt/docker"
       log-level: "debug"
