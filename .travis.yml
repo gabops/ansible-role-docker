@@ -10,7 +10,7 @@ env:
     - TEST_DISTRO: fedora:31
     - TEST_DISTRO: ubuntu:16.04
     - TEST_DISTRO: ubuntu:18.04
-    - TEST_DISTRO: ubuntu:19.04
+    - TEST_DISTRO: ubuntu:19.10
 
 install:
   - pip install -r molecule/requirements.txt

@@ -23,7 +23,17 @@ def test_docker_version(host):
     docker = host.package("docker-ce")
 
     assert docker.is_installed
-    assert "18.09" in docker.version
+    if (
+        host.system_info.distribution == 'fedora' or
+        (
+            host.system_info.distribution == 'ubuntu' and
+            host.system_info.codename == 'eoan'
+        )
+    ):
+        assert "19.03" in docker.version
+
+    else:
+        assert "18.09" in docker.version
 
 
 def test_docker_cli_version(host):
