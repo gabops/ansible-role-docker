@@ -19,7 +19,7 @@ Role Variables
 | docker_release_channel | stable | Defines the release channel to install Docker from. Possible values are `stable`, `test` and `nigthly`. |
 | docker_service_enabled | true | Controls if the Docker service should be enabled or not in order to be started when the system boots. |
 | docker_service_state | started | Defines the status of the Docker service. Typical values here are `started` or `stopped` |
-| docker_daemon_config | "" | Defines the settings to be applied on `/etc/docker/daemon.json` in order to configure the Docker service. |
+| docker_daemon_config | {} | Defines the settings to be applied on `/etc/docker/daemon.json` in order to configure the Docker service. |
 | docker_group_members | [] | Defines the `users` and/or `groups` to be added to the `docker` group. Note that this role does **not create** users nor groups, it just **appends** existing users and groups to the docker group. |
 
 ### Notes:
