@@ -16,7 +16,6 @@
       getent:
         database: passwd
         key: "{{ item.user }}"
-        fail_key: false
       register: docker_getent_passwd
       loop: "{{ docker_user_config }}"
 
@@ -25,7 +24,8 @@
         path: "{{ item.ansible_facts.getent_passwd[item.item.user].4 }}/.docker"
         state: directory
         owner: "{{ item.item.user }}"
-      when: item.ansible_facts.getent_passwd[item.item.user].4 is defined
+        group: "{{ item.ansible_facts.getent_passwd[item.item.user].2 }}"
+      when: item.item.config is defined
       loop: "{{ docker_getent_passwd.results }}"
 
     - name: Configure Docker for user
@@ -33,7 +33,8 @@
         src: config.json.j2
         dest: "{{ item.ansible_facts.getent_passwd[item.item.user].4 }}/.docker/config.json"
         owner: "{{ item.item.user }}"
-      when: item.ansible_facts.getent_passwd[item.item.user].4 is defined
+        group: "{{ item.ansible_facts.getent_passwd[item.item.user].2 }}"
+      when: item.item.config is defined
       loop: "{{ docker_getent_passwd.results }}"
   when: docker_user_config | length
 
