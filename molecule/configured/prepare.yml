@@ -16,4 +16,7 @@
 
     - name: Create users
       user:
-        name: john.doe
+        name: "{{ item }}"
+      loop:
+        - john.doe
+        - jenkins

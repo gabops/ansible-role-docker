@@ -11,4 +11,6 @@ docker_release_channel: stable
 
 docker_daemon_config: {}
 
+docker_user_config: []
+
 docker_group_members: []
