@@ -16,6 +16,15 @@
         max-size: "10m"
         max-file: "3"
         labels: "molecule_test"
+    docker_user_config:
+      - user: john.doe
+        config:
+          psFormat: !unsafe "table {{.ID}}\\t{{.Labels}}"
+          imagesFormat: !unsafe "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}"
+      - user: jenkins
+        config:
+          credsStore: "ecr-login"
+
   tasks:
     - name: Set Docker version for Debian
       set_fact:
