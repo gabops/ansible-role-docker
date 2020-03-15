@@ -20,7 +20,7 @@ Role Variables
 | docker_service_enabled | true | Controls if the Docker service should be enabled or not in order to be started when the system boots. |
 | docker_service_state | started | Defines the status of the Docker service. Typical values here are `started` or `stopped` |
 | docker_daemon_config | {} | Defines the settings to be applied on `/etc/docker/daemon.json` in order to configure the Docker service. |
-| docker_user_config | [] | Defines the configuration to be applied on `/home/$USER/.docker/config.json`. If a user defined does not exist, the role will skip it without any modification. See Example Playbook. |
+| docker_user_config | [] | Defines the configuration to be applied to users on `$HOME/.docker/config.json`. If a user defined in the key `user` does not exist the role will fail. |
 | docker_group_members | [] | Defines the `users` and/or `groups` to be added to the `docker` group. Note that this role does **not create** users nor groups, it just **appends** existing users and groups to the docker group. |
 
 ### Notes:
@@ -31,9 +31,9 @@ Role Variables
     docker_cli_version: "5:19.03"
 ```
 
-- The role will detect automatically the home dir of the users defined on `docker_user_config` and will create inside the `.docker/config.json` file.
+- The role will detect automatically the home dir of the users defined on `docker_user_config` by consulting the value on `/etc/passwd`.
 
-- For some values (p.g psFormat) in the key `config` defined on `docker_user_config` you may need to use the prefix !unsafe. The reason for this is avoiding to render the double curly braces, otherwise Ansible will assume is a Jinja value and will try to render it. See Example Playbook.
+- For some values (p.g psFormat) in the key `config` defined on `docker_user_config` you may need to use the prefix `!unsafe`. The reason for this is avoiding to render the double curly braces that Docker uses, otherwise Ansible will assume is a Jinja value and will try to render it. See Example Playbook.
 
 Dependencies
 ------------
@@ -62,7 +62,7 @@ Example Playbook
           credsStore: "ecr-login"
       - user: devops
         config:
-          psFormat: !unsafe "table {{.ID}}\\t{{.Image}}\\t{{.Command}}\\t{{.Labels}}"
+          psFormat: !unsafe "table {{.ID}}\\t{{.Labels}}"
           imagesFormat: !unsafe "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}"
       - user: developer
         config:
@@ -70,6 +70,7 @@ Example Playbook
             default:
               httpProxy:  http://user:1234@proxy.company.com:3128
               httpsProxy: http://user:1234@proxy.company.com:3128
+        
     docker_group_members:
       - devops
       - john.doe
