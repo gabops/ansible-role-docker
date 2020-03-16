@@ -72,8 +72,9 @@ Example Playbook
               httpsProxy: http://user:1234@proxy.company.com:3128
         
     docker_group_members:
+      - jenkins
       - devops
-      - john.doe
+      - developer
 
   roles:
     - role: gabops.docker
