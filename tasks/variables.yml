@@ -7,6 +7,11 @@
     docker_system_arch: amd64
   when: ansible_architecture == "x86_64"
 
+- name: Set architecture format for "armv7l"
+  set_fact:
+    docker_system_arch: arm64
+  when: ansible_architecture == "armv7l"
+
 - name: Set Docker package versions (RedHat)
   set_fact:
     docker_packages:
