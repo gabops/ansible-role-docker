@@ -1,0 +1,9 @@
+---
+docker_repository: deb [arch={{ docker_system_arch | default(ansible_architecture) }}] https://download.docker.com/linux/raspbian {{ ansible_distribution_release }} {{ docker_release_channel }}
+docker_repository_key: https://download.docker.com/linux/raspbian/gpg
+docker_deprecated_packages:
+  - docker
+  - docker-engine
+  - docker.io
+  - containerd
+  - runc

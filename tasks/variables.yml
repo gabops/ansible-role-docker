@@ -1,11 +1,16 @@
 ---
-- name: Include distro variables
-  include_vars: "{{ ansible_distribution }}.yml"
-
 - name: Set architecture format for "x86_64"
   set_fact:
     docker_system_arch: amd64
   when: ansible_architecture == "x86_64"
+
+- name: Set architecture format for "armv7l"
+  set_fact:
+    docker_system_arch: armhf
+  when: ansible_architecture == "armv7l"
+
+- name: Include distro variables
+  include_vars: "{{ ansible_lsb.id | default(ansible_distribution) }}.yml"
 
 - name: Set Docker package versions (RedHat)
   set_fact:
