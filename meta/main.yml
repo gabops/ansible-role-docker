@@ -23,8 +23,15 @@ galaxy_info:
         - eoan
 
   galaxy_tags:
-    - docker
-    - system
+    - centos
     - containers
+    - debian
+    - docker
+    - fedora
+    - raspbian
+    - raspberry
+    - raspberrypi
+    - system
+    - ubuntu
 
 dependencies: []
