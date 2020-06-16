@@ -27,7 +27,7 @@ def test_docker_version(host):
         host.system_info.distribution == 'fedora' or
         (
             host.system_info.distribution == 'ubuntu' and
-            host.system_info.codename == 'eoan'
+            host.system_info.codename in ['eoan', 'focal']
         )
     ):
         assert "19.03" in docker.version
