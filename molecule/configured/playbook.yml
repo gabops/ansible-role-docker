@@ -44,6 +44,12 @@
         docker_cli_version: "5:19.03.7"
       when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "eoan"
 
+    - name: Set Docker version for Ubuntu Focal Fossa
+      set_fact:
+        docker_engine_version: "5:19.03.9"
+        docker_cli_version: "5:19.03.10"
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "focal"
+
     - name: Install and configure Docker
       import_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

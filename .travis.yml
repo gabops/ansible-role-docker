@@ -11,6 +11,7 @@ env:
     - TEST_DISTRO: ubuntu:16.04
     - TEST_DISTRO: ubuntu:18.04
     - TEST_DISTRO: ubuntu:19.10
+    - TEST_DISTRO: ubuntu:20.04
 
 install:
   - pip install -r molecule/requirements.txt

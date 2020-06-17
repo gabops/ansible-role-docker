@@ -21,6 +21,7 @@ galaxy_info:
         - xenial
         - bionic
         - eoan
+        - focal
 
   galaxy_tags:
     - centos
