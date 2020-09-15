@@ -9,6 +9,11 @@
     docker_system_arch: armhf
   when: ansible_architecture == "armv7l"
 
+- name: Set architecture format for "aarch64"
+  set_fact:
+    docker_system_arch: arm64
+  when: ansible_architecture == "aarch64"
+
 - name: Include distro variables
   include_vars: "{{ ansible_lsb.id | default(ansible_distribution) }}.yml"
 
