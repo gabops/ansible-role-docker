@@ -7,7 +7,8 @@ env:
     - TEST_DISTRO: centos:7
     - TEST_DISTRO: debian:9
     - TEST_DISTRO: debian:10
-    - TEST_DISTRO: fedora:31
+    # - TEST_DISTRO: fedora:31
+    # - TEST_DISTRO: fedora:32
     - TEST_DISTRO: ubuntu:16.04
     - TEST_DISTRO: ubuntu:18.04
     - TEST_DISTRO: ubuntu:19.10

@@ -13,9 +13,10 @@ galaxy_info:
       versions:
         - stretch
         - buster
-    - name: Fedora
-      versions:
-        - 31
+    # - name: Fedora
+    #  versions:
+    #    - 31
+    #    - 32
     - name: Ubuntu
       versions:
         - xenial
