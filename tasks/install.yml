@@ -19,6 +19,7 @@
         name: "{{ docker_packages }}"
         state: present
         enablerepo: "docker-ce-{{ docker_release_channel }}"
+      when: not ansible_check_mode
   when: ansible_os_family == "RedHat"
 
 - block:
@@ -40,4 +41,5 @@
       apt:
         name: "{{ docker_packages }}"
         update_cache: true
+      when: not ansible_check_mode
   when: ansible_os_family == "Debian"

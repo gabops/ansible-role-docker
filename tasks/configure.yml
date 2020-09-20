@@ -44,6 +44,7 @@
     user: "{{ item }}"
     groups: docker
     append: true
+  when: not ansible_check_mode
   loop: "{{ docker_group_members }}"
 
 - name: Configure Docker service
