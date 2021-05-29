@@ -3,8 +3,6 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
 platforms:
   - name: instance
     image: ${TEST_DISTRO:-centos:7}
@@ -23,5 +21,7 @@ provisioner:
         - "206"
 verifier:
   name: testinfra
-  lint:
-    name: flake8
+lint: |
+ set -e
+ yamllint .
+ flake8

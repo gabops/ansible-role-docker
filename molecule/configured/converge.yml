@@ -1,0 +1,29 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    docker_group_members:
+      - devops
+      - john.doe
+    docker_daemon_config:
+      data-root: "/mnt/docker"
+      log-level: "debug"
+      storage-driver: "vfs"
+      log-driver: "json-file"
+      log-opts:
+        max-size: "10m"
+        max-file: "3"
+        labels: "molecule_test"
+    docker_user_config:
+      - user: john.doe
+        config:
+          psFormat: !unsafe "table {{.ID}}\\t{{.Labels}}"
+          imagesFormat: !unsafe "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}"
+      - user: jenkins
+        config:
+          credsStore: "ecr-login"
+
+  tasks:
+    - name: Install and configure Docker
+      import_role:
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

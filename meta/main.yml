@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: docker
+  namespace: gabops
   author: Gabriel Suarez
   description: Installs and configures Docker Community Edition.
   license: MIT
